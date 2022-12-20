@@ -2,17 +2,17 @@ import { RootState } from './../../store';
 import { createSlice } from '@reduxjs/toolkit';
 
 type InitialState = {
-    isLoggedIn: boolean;
+  isLoggedIn: boolean;
 };
 
 const initialState: InitialState = {
-    isLoggedIn: false,
+  isLoggedIn: false,
 };
 
 const authSlice = createSlice({
-    name: 'auth',
-    initialState,
-    reducers: {},
+  name: 'auth',
+  initialState,
+  reducers: {},
 });
 
 // ACTIONS

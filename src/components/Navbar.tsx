@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full shadow">
-      <div className="mx-auto w-[80rem] h-16 flex justify-between items-center">
+      <div className="mx-auto max-w-[80rem] h-16 flex justify-between items-center bg-white">
         <img src={logo} alt="Logo" className="w-16" />
         {isLoggedIn ? (
           <Button>Logout</Button>
@@ -17,7 +17,7 @@ const Navbar = () => {
           <div className="flex gap-10 items-center">
             <Link to="/login">Login</Link>
             <Link to="/register">
-              <Button>Register</Button>
+              <Button>Sign up</Button>
             </Link>
           </div>
         )}
