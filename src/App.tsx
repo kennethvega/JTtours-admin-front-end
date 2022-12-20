@@ -16,8 +16,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={isLoggedIn ? <Dashboard /> : <Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={!isLoggedIn ? <Login /> : <Dashboard />} />
+        <Route path="/register" element={!isLoggedIn ? <Register /> : <Dashboard />} />
       </Routes>
     </BrowserRouter>
   );

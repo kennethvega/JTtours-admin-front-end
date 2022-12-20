@@ -8,11 +8,13 @@ const Navbar = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   return (
-    <div className="w-full shadow">
-      <div className="mx-auto max-w-[80rem] h-16 flex justify-between items-center bg-white">
+    <div className="w-full shadow bg-white">
+      <div className="mx-auto max-w-[80rem] h-16 flex justify-between items-center ">
         <img src={logo} alt="Logo" className="w-16" />
         {isLoggedIn ? (
-          <Button>Logout</Button>
+          <div className="max-w-[6rem]">
+            <Button>Logout</Button>
+          </div>
         ) : (
           <div className="flex gap-10 items-center">
             <Link to="/login">Login</Link>
