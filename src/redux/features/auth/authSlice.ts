@@ -6,7 +6,7 @@ type InitialState = {
 };
 
 const initialState: InitialState = {
-  isLoggedIn: false,
+  isLoggedIn: true,
 };
 
 const authSlice = createSlice({

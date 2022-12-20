@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full shadow bg-white">
-      <div className="mx-auto max-w-[80rem] h-16 flex justify-between items-center ">
+      <div className="mx-auto max-w-[82rem] h-16 flex justify-between items-center px-8">
         <img src={logo} alt="Logo" className="w-16" />
         {isLoggedIn ? (
           <div className="max-w-[6rem]">

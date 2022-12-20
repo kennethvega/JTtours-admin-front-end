@@ -20,7 +20,7 @@
 
   body {
     font-family: 'Poppins', sans-serif;
-    background-color: #fbfaf8;
+    background-color: #ffff;
   }
   html::-webkit-scrollbar {
     width: 0.5vw;
@@ -44,4 +44,8 @@
   textarea {
     @apply bg-gray-100  h-28 p-2;
   }
+}
+
+.dashboard-grid {
+  grid-template-columns: 20% 1fr;
 }
