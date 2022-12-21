@@ -3,29 +3,88 @@ import Card from '../../components/utility/Card';
 import Container from '../../components/utility/Container';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { registerUser } from '../../redux/features/auth/authService';
+const initialState = {
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+  adminCode: '',
+};
+
 const Register = () => {
+  const [formData, setFormData] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState('');
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { name, email, password, confirmPassword, adminCode } = formData;
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value }); //set name to its value (name should be equal to value in input)
+  };
+  // React.ChangeEvent<HTMLInputElement>) => string | undefined'
+  console.log(import.meta.env.VITE_ADMIN_CODE);
+  const register = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (adminCode !== import.meta.env.VITE_ADMIN_CODE) {
+      return toast.error('Wrong admin code, please ask the admin for the code.');
+    }
+    if (!name || !email || !password) {
+    }
+    if (password.length <= 6) {
+      return toast.error('Password must be greater than 6.');
+    }
+    if (password !== confirmPassword) {
+      return toast.error('Passwords does not match.');
+    }
+    const userData = {
+      name,
+      email,
+      password,
+    };
+    setIsLoading(true);
+    try {
+      const data = await registerUser(userData);
+      console.log(data);
+      setIsLoading(false);
+    } catch (error: any) {
+      toast.error(error.message);
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Container>
       <div className="max-w-[30rem] mx-auto">
         <div className="mt-10 mb-6">
           <Card>
-            <form className="px-10 py-10">
+            <form onSubmit={register} className="px-10 py-10">
               <h3 className="text-center text-2xl font-bold mb-10">Sign up</h3>
-              <input type="text" placeholder="Admin code" required />
-              <input type="text" placeholder="Name" required />
-              <input type="email" placeholder="Email" required />
+              <input name="adminCode" value={adminCode} onChange={handleInputChange} type="text" placeholder="Admin code" required />
+              <input name="name" value={name} onChange={handleInputChange} type="text" placeholder="Name" required />
+              <input name="email" value={email} onChange={handleInputChange} type="email" placeholder="Email" required />
+              {/* password */}
               <div className="relative flex items-center">
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type={showPassword ? 'text' : 'password'} placeholder="Password" required />
+                <input name="password" value={password} onChange={handleInputChange} type={showPassword ? 'text' : 'password'} placeholder="Password" required />
                 {password.length > 0 && (
                   <button type="button" className="absolute right-3 top-2 font-semibold" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? 'Hide' : 'Show'}
                   </button>
                 )}
               </div>
+              {/* confirm password */}
+              <div className="relative flex items-center">
+                <input name="confirmPassword" value={confirmPassword} onChange={handleInputChange} type={showConfirmPassword ? 'text' : 'password'} placeholder="Confirm password" required />
+                {confirmPassword.length > 0 && (
+                  <button type="button" className="absolute right-3 top-2 font-semibold" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                    {showConfirmPassword ? 'Hide' : 'Show'}
+                  </button>
+                )}
+              </div>
 
-              <Button>
+              <Button type="submit">
                 <p className="p-1 font-semibold">Sign up</p>
               </Button>
             </form>

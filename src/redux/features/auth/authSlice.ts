@@ -16,11 +16,11 @@ type InitialState = {
 const name = JSON.parse(localStorage.getItem('name') || '{}');
 
 const initialState: InitialState = {
-  isLoggedIn: true,
+  isLoggedIn: false,
   name: name ? name : '',
   user: {
     name: '',
-    email: '',
+    email: '',                                                                                                                                                                                                                    
     admin: false,
   },
   // userID: '',

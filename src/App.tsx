@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import axios from 'axios';
 // pages
 import Navbar from './components/Navbar';
 import Product from './pages/dashboard/Product';
@@ -9,6 +10,8 @@ import Register from './pages/auth/Register';
 import { selectIsLoggedIn } from './redux/features/auth/authSlice';
 import { useAppSelector } from './redux/hooks';
 
+// axios default setting
+axios.defaults.withCredentials = true;
 function App() {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   return (
