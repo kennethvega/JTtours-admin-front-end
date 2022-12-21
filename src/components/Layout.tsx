@@ -14,8 +14,8 @@ const Layout = ({ children }: LayoutProps) => {
         <Sidebar />
         <div>
           <Card>
-            <div className="sticky top-0 flex justify-between bg-white p-3 border-b backdrop-blur-sm bg-opacity-80">
-              <h3 className="text-2xl font-bold ">Dashboard</h3>
+            <div className="sticky top-0 flex justify-between bg-white p-3  backdrop-blur-sm bg-opacity-80">
+              <h3 className="text-2xl font-bold ">Admin Dashboard</h3>
               <div className="max-w-[6rem]">
                 <Button>Logout</Button>
               </div>
