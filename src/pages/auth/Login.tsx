@@ -1,22 +1,62 @@
 import Button from '../../components/utility/Button';
 import Card from '../../components/utility/Card';
 import Container from '../../components/utility/Container';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useAppDispatch } from '../../redux/hooks';
+import { toast } from 'react-hot-toast';
+import { loginUser } from '../../redux/features/auth/authService';
+import { SET_LOGIN, SET_NAME } from '../../redux/features/auth/authSlice';
+import Loading from '../../components/utility/Loading';
+
+const initialState = {
+  email: '',
+  password: '',
+};
 const Login = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { email, password } = formData;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value }); //set name to its value (name should be equal to value in input)
+  };
+
+  const login = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const userData = {
+      email,
+      password,
+    };
+    setIsLoading(true);
+    try {
+      const data = await loginUser(userData);
+      console.log(data);
+      await dispatch(SET_LOGIN(true));
+      await dispatch(SET_NAME(data.name));
+      setIsLoading(false);
+      toast.success('Successfully logged in');
+      navigate('/product');
+    } catch (error: any) {
+      toast.error(error.message);
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Container>
       <div className="max-w-[30rem] mx-auto">
         <div className="mt-10 mb-6 ">
           <Card>
-            <form className="px-10 py-10">
+            <form onSubmit={login} className="px-10 py-10">
               <h3 className="text-center text-2xl font-bold mb-10">Admin Login</h3>
-              <input type="email" placeholder="Email" required />
+              <input name="email" value={email} onChange={handleInputChange} type="email" placeholder="Email" required />
               <div className="relative flex items-center">
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type={showPassword ? 'text' : 'password'} placeholder="Password" required />
+                <input name="password" value={password} onChange={handleInputChange} type={showPassword ? 'text' : 'password'} placeholder="Password" required />
                 {password.length > 0 && (
                   <button type="button" className="absolute right-3 top-2 font-semibold" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? 'Hide' : 'Show'}
@@ -24,9 +64,17 @@ const Login = () => {
                 )}
               </div>
 
-              <Button>
-                <p className="p-1 font-semibold">Login</p>
-              </Button>
+              {isLoading ? (
+                <Button type="button">
+                  <p className="p-1 font-semibold">
+                    <Loading />
+                  </p>
+                </Button>
+              ) : (
+                <Button type="submit">
+                  <p className="p-1 font-semibold">Login</p>
+                </Button>
+              )}
             </form>
           </Card>
         </div>

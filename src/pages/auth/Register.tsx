@@ -55,7 +55,8 @@ const Register = () => {
       await dispatch(SET_LOGIN(true));
       await dispatch(SET_NAME(data.name));
       setIsLoading(false);
-      navigate('/');
+      navigate('/product');
+      toast.success('Account created');
     } catch (error: any) {
       toast.error(error.message);
       setIsLoading(false);
@@ -69,7 +70,7 @@ const Register = () => {
           <Card>
             <form onSubmit={register} className="px-10 py-10">
               <h3 className="text-center text-2xl font-bold mb-10">Sign up</h3>
-              <input name="adminCode" value={adminCode} onChange={handleInputChange} type="text" placeholder="Admin code" required />
+              <input name="adminCode" value={adminCode} onChange={handleInputChange} type="password" placeholder="Admin code" required />
               <input name="name" value={name} onChange={handleInputChange} type="text" placeholder="Name" required />
               <input name="email" value={email} onChange={handleInputChange} type="email" placeholder="Email" required />
               {/* password */}
@@ -91,7 +92,7 @@ const Register = () => {
                 )}
               </div>
               {isLoading ? (
-                <Button type="submit">
+                <Button type="button">
                   <p className="p-1 font-semibold">
                     <Loading />
                   </p>
@@ -108,7 +109,7 @@ const Register = () => {
           <p className="px-10 py-5 text-center">
             Already have an account ?{' '}
             <span className="text-[#0095F6] hover:text-[#1C77FF]">
-              <Link to="/login">Login </Link>
+              <Link to="/">Login </Link>
             </span>
           </p>
         </Card>

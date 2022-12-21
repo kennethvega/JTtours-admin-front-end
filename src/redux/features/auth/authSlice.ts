@@ -20,7 +20,7 @@ const initialState: InitialState = {
   name: name ? name : '',
   user: {
     name: '',
-    email: '',                                                                                                                                                                                                                    
+    email: '',
     admin: false,
   },
   // userID: '',
@@ -30,7 +30,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     SET_LOGIN(state, action) {
-      state.isLoggedIn = action.payload;
+      state.isLoggedIn = action.payload; // boolean
     },
     SET_NAME(state, action) {
       localStorage.setItem('name', JSON.stringify(action.payload)); //set name to localStorage

@@ -19,9 +19,9 @@ function App() {
       {!isLoggedIn && <Navbar />}
 
       <Routes>
-        <Route path="/login" element={!isLoggedIn ? <Login /> : <Product />} />
+        <Route path="/" element={!isLoggedIn ? <Login /> : <Product />} />
         <Route path="/register" element={!isLoggedIn ? <Register /> : <Product />} />
-        <Route path="/" element={isLoggedIn ? <Product /> : <Login />} />
+        <Route path="/product" element={isLoggedIn ? <Product /> : <Login />} />
       </Routes>
     </BrowserRouter>
   );
