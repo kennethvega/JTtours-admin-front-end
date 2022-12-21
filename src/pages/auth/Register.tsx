@@ -1,10 +1,14 @@
 import Button from '../../components/utility/Button';
 import Card from '../../components/utility/Card';
 import Container from '../../components/utility/Container';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
+// redux
 import { registerUser } from '../../redux/features/auth/authService';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { SET_LOGIN, SET_NAME, SET_USER } from '../../redux/features/auth/authSlice';
+import Loading from '../../components/utility/Loading';
 const initialState = {
   name: '',
   email: '',
@@ -14,6 +18,8 @@ const initialState = {
 };
 
 const Register = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -24,8 +30,7 @@ const Register = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value }); //set name to its value (name should be equal to value in input)
   };
-  // React.ChangeEvent<HTMLInputElement>) => string | undefined'
-  console.log(import.meta.env.VITE_ADMIN_CODE);
+
   const register = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (adminCode !== import.meta.env.VITE_ADMIN_CODE) {
@@ -47,8 +52,10 @@ const Register = () => {
     setIsLoading(true);
     try {
       const data = await registerUser(userData);
-      console.log(data);
+      await dispatch(SET_LOGIN(true));
+      await dispatch(SET_NAME(data.name));
       setIsLoading(false);
+      navigate('/');
     } catch (error: any) {
       toast.error(error.message);
       setIsLoading(false);
@@ -83,10 +90,17 @@ const Register = () => {
                   </button>
                 )}
               </div>
-
-              <Button type="submit">
-                <p className="p-1 font-semibold">Sign up</p>
-              </Button>
+              {isLoading ? (
+                <Button type="submit">
+                  <p className="p-1 font-semibold">
+                    <Loading />
+                  </p>
+                </Button>
+              ) : (
+                <Button type="submit">
+                  <p className="p-1 font-semibold">Sign up</p>
+                </Button>
+              )}
             </form>
           </Card>
         </div>
