@@ -1,13 +1,13 @@
 import React from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { logoutUser } from '../redux/features/auth/authService';
-import { SET_LOGIN } from '../redux/features/auth/authSlice';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import Sidebar from './sidebar/Sidebar';
-import Button from './utility/Button';
-import Card from './utility/Card';
-import Container from './utility/Container';
+import { logoutUser } from '../../redux/features/auth/authService';
+import { SET_LOGIN } from '../../redux/features/auth/authSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import Sidebar from '../sidebar/Sidebar';
+import Button from './Button';
+import Card from './Card';
+import Container from './Container';
 
 type LayoutProps = {
   children: React.ReactNode;

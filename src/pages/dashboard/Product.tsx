@@ -1,4 +1,4 @@
-import Layout from '../../components/Layout';
+import Layout from '../../components/utility/Layout';
 import { useEffect } from 'react';
 import usePageRedirect from '../../hooks/usePageRedirect';
 const Product = () => {
