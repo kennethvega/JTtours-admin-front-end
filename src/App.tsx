@@ -32,9 +32,9 @@ function App() {
         <BrowserRouter>
           {!isLoggedIn && <Navbar />}
           <Routes>
-            <Route path="/" element={!isLoggedIn ? <Login /> : <Product />} />
+            <Route path="/login" element={!isLoggedIn ? <Login /> : <Product />} />
             <Route path="/register" element={!isLoggedIn ? <Register /> : <Product />} />
-            <Route path="/product" element={isLoggedIn ? <Product /> : <Login />} />
+            <Route path="/product" element={<Product />} />
           </Routes>
         </BrowserRouter>
       )}

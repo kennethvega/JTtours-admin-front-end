@@ -109,7 +109,7 @@ const Register = () => {
           <p className="px-10 py-5 text-center">
             Already have an account ?{' '}
             <span className="text-[#0095F6] hover:text-[#1C77FF]">
-              <Link to="/">Login </Link>
+              <Link to="/login">Login </Link>
             </span>
           </p>
         </Card>

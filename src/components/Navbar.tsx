@@ -9,7 +9,7 @@ const Navbar = () => {
       <div className="mx-auto max-w-[82rem] h-16 flex justify-between items-center px-8">
         <img src={logo} alt="Logo" className="w-16" />
         <div className="flex gap-10 items-center">
-          <Link to="/">
+          <Link to="/login">
             <p>Login</p>
           </Link>
           <Link to="/register">

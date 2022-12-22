@@ -19,7 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
   const logout = async () => {
     await logoutUser();
     await dispatch(SET_LOGIN(false));
-    navigate('/');
+    navigate('/login');
     toast.success('Successfully logged out');
   };
   return (
