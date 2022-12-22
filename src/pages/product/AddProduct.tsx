@@ -1,7 +1,7 @@
 import Layout from '../../components/utility/Layout';
 import usePageRedirect from '../../hooks/usePageRedirect';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, SetStateAction } from 'react';
 
 import { createProduct, selectIsLoading } from '../../redux/features/products/productSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -26,7 +26,7 @@ const AddProduct = () => {
   const isLoading = useAppSelector(selectIsLoading);
   // local state
   const [product, setProduct] = useState(initialState);
-  const [productImage, setProductImage] = useState<string | Blob>('');
+  const [productImage, setProductImage] = useState<SetStateAction<string> | File>('');
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [description, setDescription] = useState<string>('');
   const { country, city, price, date } = product; //destructure

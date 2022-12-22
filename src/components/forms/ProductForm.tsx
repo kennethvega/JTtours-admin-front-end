@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, FormEvent, useRef } from 'react';
 import Card from '../utility/Card';
 import upload from '../../assets/upload.jpg';
+import Button from '../utility/Button';
 type Product = {
   country: string;
   city: string;
@@ -9,7 +10,7 @@ type Product = {
 };
 type ProductFormProps = {
   product: Product;
-  productImage: string | Blob;
+  productImage: SetStateAction<string> | File;
   imagePreview: string | null;
   description: string;
   setDescription: any;
@@ -18,7 +19,6 @@ type ProductFormProps = {
   saveProduct: (e: FormEvent<HTMLFormElement>) => void;
 };
 const ProductForm = ({ product, productImage, imagePreview, description, setDescription, handleInputChange, handleImageChange, saveProduct }: ProductFormProps) => {
-  console.log(description);
   const fileInputRef = useRef<HTMLInputElement>(null);
   return (
     <form onSubmit={saveProduct} className="py-2">
@@ -39,7 +39,6 @@ const ProductForm = ({ product, productImage, imagePreview, description, setDesc
             fileInputRef.current?.click();
           }}
         />
-
         <input
           ref={fileInputRef}
           type="file"
@@ -65,7 +64,9 @@ const ProductForm = ({ product, productImage, imagePreview, description, setDesc
           setDescription(e.target.value);
         }}
         placeholder="Description"
+        className="mb-4"
       />
+      <Button type="submit">Add product</Button>
     </form>
   );
 };
