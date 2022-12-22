@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 // pages
 import Navbar from './components/Navbar';
-import Product from './pages/dashboard/Product';
+import Product from './pages/product/Product';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 
@@ -12,6 +12,7 @@ import { selectAuth, selectIsLoggedIn, SET_AUTH } from './redux/features/auth/au
 import { useAppSelector, useAppDispatch } from './redux/hooks';
 import { SET_LOGIN, SET_NAME, SET_USER } from './redux/features/auth/authSlice';
 import { getLoginStatus } from './redux/features/auth/authService';
+import AddProduct from './pages/product/AddProduct';
 axios.defaults.withCredentials = true; // axios default setting
 function App() {
   const dispatch = useAppDispatch();
@@ -34,7 +35,8 @@ function App() {
           <Routes>
             <Route path="/login" element={!isLoggedIn ? <Login /> : <Product />} />
             <Route path="/register" element={!isLoggedIn ? <Register /> : <Product />} />
-            <Route path="/product" element={<Product />} />
+            <Route path="/" element={<Product />} />
+            <Route path="/add-product" element={<AddProduct />} />
           </Routes>
         </BrowserRouter>
       )}

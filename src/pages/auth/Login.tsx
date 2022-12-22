@@ -40,7 +40,7 @@ const Login = () => {
       await dispatch(SET_NAME(data.name));
       setIsLoading(false);
       toast.success('Successfully logged in');
-      navigate('/product');
+      navigate('/');
     } catch (error: any) {
       toast.error(error.message);
       setIsLoading(false);
