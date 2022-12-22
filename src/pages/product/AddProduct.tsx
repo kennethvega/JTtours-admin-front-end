@@ -2,9 +2,8 @@ import Layout from '../../components/utility/Layout';
 import usePageRedirect from '../../hooks/usePageRedirect';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, FormEvent, SetStateAction } from 'react';
-
-import { createProduct, selectIsLoading } from '../../redux/features/products/productSlice';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { createProduct } from '../../redux/features/products/productSlice';
+import { useAppDispatch } from '../../redux/hooks';
 import ProductForm from '../../components/forms/ProductForm';
 
 type InitialState = {
@@ -23,7 +22,6 @@ const initialState: InitialState = {
 const AddProduct = () => {
   // redux global state
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(selectIsLoading);
   // local state
   const [product, setProduct] = useState(initialState);
   const [productImage, setProductImage] = useState<SetStateAction<string> | File>('');
