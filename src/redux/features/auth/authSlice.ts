@@ -7,6 +7,7 @@ type UserType = {
   admin: boolean;
 };
 type InitialState = {
+  auth: boolean;
   isLoggedIn: boolean;
   name: string;
   user: UserType;
@@ -16,6 +17,7 @@ type InitialState = {
 const name = JSON.parse(localStorage.getItem('name') || '{}');
 
 const initialState: InitialState = {
+  auth: false,
   isLoggedIn: false,
   name: name ? name : '',
   user: {
@@ -32,6 +34,9 @@ const authSlice = createSlice({
     SET_LOGIN(state, action) {
       state.isLoggedIn = action.payload; // boolean
     },
+    SET_AUTH(state, action) {
+      state.auth = action.payload; // boolean
+    },
     SET_NAME(state, action) {
       localStorage.setItem('name', JSON.stringify(action.payload)); //set name to localStorage
       state.name = action.payload;
@@ -46,8 +51,9 @@ const authSlice = createSlice({
 });
 
 // ACTIONS/SETTER
-export const { SET_LOGIN, SET_NAME, SET_USER } = authSlice.actions;
+export const { SET_LOGIN, SET_AUTH, SET_NAME, SET_USER } = authSlice.actions;
 // STATE
+export const selectAuth = (state: RootState) => state.auth.auth;
 export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
 export const selectName = (state: RootState) => state.auth.name;
 export const selectUser = (state: RootState) => state.auth.user;

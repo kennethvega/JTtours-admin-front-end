@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 // redux
 import { registerUser } from '../../redux/features/auth/authService';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch } from '../../redux/hooks';
 import { SET_LOGIN, SET_NAME, SET_USER } from '../../redux/features/auth/authSlice';
 import Loading from '../../components/utility/Loading';
 const initialState = {

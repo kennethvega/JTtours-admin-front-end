@@ -35,10 +35,20 @@ export const loginUser = async (userData: UserLoginProps) => {
 };
 
 // LOGOUT ------
-
 export const logoutUser = async () => {
   try {
     await axios.get(`${BACKEND_URL}/api/users/logout`);
+  } catch (error: any) {
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+    toast.error(message);
+  }
+};
+
+// GET LOGIN STATUS----
+export const getLoginStatus = async () => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/api/users/loggedin`);
+    return response.data;
   } catch (error: any) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
     toast.error(message);
