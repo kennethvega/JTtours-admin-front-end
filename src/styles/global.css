@@ -42,7 +42,7 @@
     @apply bg-gray-100  h-10 p-2 w-full border rounded mb-6;
   }
   textarea {
-    @apply bg-gray-100  h-28 p-2;
+    @apply bg-gray-100  h-28 p-2 w-full;
   }
 }
 

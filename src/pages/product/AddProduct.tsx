@@ -5,7 +5,7 @@ import { useState, FormEvent } from 'react';
 
 import { createProduct, selectIsLoading } from '../../redux/features/products/productSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import ProductForm from '../../components/ProductForm';
+import ProductForm from '../../components/forms/ProductForm';
 
 type InitialState = {
   country: string;
@@ -28,18 +28,18 @@ const AddProduct = () => {
   const [product, setProduct] = useState(initialState);
   const [productImage, setProductImage] = useState<string | Blob>('');
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState<string>('');
   const { country, city, price, date } = product; //destructure
   usePageRedirect('/login');
   const navigate = useNavigate();
 
   // Handling input changes on product
-  const handleInputChange = (e: React.ChangeEvent<HTMLFormElement>): void => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value }); //set name to its value (name should be equal to value in input)
   };
   // Handling image input
-  const handleImageChange = (e: React.ChangeEvent<HTMLFormElement>): void => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files != null) {
       setProductImage(e.target.files[0]);
       setImagePreview(URL.createObjectURL(e.target.files[0]));
@@ -63,11 +63,12 @@ const AddProduct = () => {
   return (
     <Layout>
       <div className="min-h-[50rem]">
-        <Link to="/">
-          <p className="flex items-center gap-2 hover:text-blue-500 cursor-pointer mb-2">&larr; Back to products list</p>
-        </Link>
-        <hr />
-        <h3>Add a new product</h3>
+        <div className="flex mb-6">
+          <Link to="/">
+            <p className="flex items-center gap-2 hover:text-blue-500 cursor-pointer mb-2 bg-gray-200 px-3 rounded-md py-2">&larr; Back to products list</p>
+          </Link>
+        </div>
+        <h3 className="text-xl font-medium">Add New Product</h3>
         <ProductForm
           product={product}
           productImage={productImage}

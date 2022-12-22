@@ -24,11 +24,11 @@ const Layout = ({ children }: LayoutProps) => {
   };
   return (
     <Container>
-      <div className="grid dashboard-grid gap-3 w-full">
+      <div className="grid dashboard-grid gap-3 ">
         <Sidebar />
         <div>
           <Card>
-            <div className="sticky top-0 flex justify-between p-3  backdrop-blur-sm bg-opacity-80">
+            <div className="sticky top-0 flex justify-between p-3 backdrop-blur-sm bg-opacity-90  border-b shadow">
               <h3 className="text-2xl font-bold ">Admin Dashboard</h3>
               <div className="max-w-[6rem]">
                 <Button onClick={logout}>Logout</Button>

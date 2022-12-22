@@ -8,13 +8,14 @@ const Product = () => {
   return (
     <Layout>
       <div className="min-h-[50rem]">
-        <Link to='/add-product'>
-          <p className="flex items-center gap-2 hover:text-blue-500 cursor-pointer mb-2">
-            <VscDiffAdded />
-            Add a product
-          </p>
-        </Link>
-        <hr />
+        <div className="flex">
+          <Link to="/add-product">
+            <p className="flex items-center gap-2 hover:text-blue-500 cursor-pointer mb-2 bg-gray-200 px-3 py-2 rounded-md">
+              <VscDiffAdded />
+              Add a product
+            </p>
+          </Link>
+        </div>
       </div>
     </Layout>
   );
