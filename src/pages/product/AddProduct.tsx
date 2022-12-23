@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, FormEvent, SetStateAction } from 'react';
 import { createProduct } from '../../redux/features/products/productSlice';
 import { useAppDispatch } from '../../redux/hooks';
-import ProductForm from '../../components/forms/ProductForm';
+import ProductForm from '../../components/products/ProductForm';
 
 type InitialState = {
   country: string;
@@ -67,6 +67,7 @@ const AddProduct = () => {
           </Link>
         </div>
         <h3 className="text-xl font-medium">Add New Product</h3>
+        <hr />
         <ProductForm
           product={product}
           productImage={productImage}

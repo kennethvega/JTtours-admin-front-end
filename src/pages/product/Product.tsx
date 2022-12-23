@@ -16,6 +16,7 @@ const Product = () => {
             </p>
           </Link>
         </div>
+        <hr />
       </div>
     </Layout>
   );
