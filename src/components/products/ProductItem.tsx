@@ -1,6 +1,7 @@
 import { TbEdit } from 'react-icons/tb';
 import { MdDeleteForever } from 'react-icons/md';
 import { ProductType } from '../../ts/productTypes';
+import DOMPurify from 'dompurify';
 type ProductItemProps = {
   product: ProductType;
 };
@@ -21,7 +22,13 @@ const ProductItem = ({ product }: ProductItemProps) => {
             </div>
           </div>
           <p>
-            <span className="font-bold">Product Description:</span> {product?.description.substring(0, 200)}...
+            <div
+              className="scrollbar"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(product?.description.substring(0, 200)),
+              }}
+            ></div>
+            ...
           </p>
           <p>
             <span className="font-bold">Tour Date:</span> {product?.date}

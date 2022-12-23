@@ -4,6 +4,7 @@ import Button from '../utility/Button';
 import { useAppSelector } from '../../redux/hooks';
 import { selectIsLoading } from '../../redux/features/products/productSlice';
 import Loading from '../utility/Loading';
+import TextEditor from '../TextEditor';
 type Product = {
   country: string;
   city: string;
@@ -53,23 +54,16 @@ const ProductForm = ({ product, productImage, imagePreview, description, setDesc
       <label>Date:</label>
       <input name="date" value={product?.date} onChange={handleInputChange} type="text" placeholder="Date" required />
       <label>Description:</label>
-      <textarea
-        id="description"
-        value={description || ''}
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
-        placeholder="Description"
-        className="mb-4"
-        required
-      />
-      {isLoading ? (
-        <Button type="submit">
-          <Loading />
-        </Button>
-      ) : (
-        <Button type="submit">Add product</Button>
-      )}
+      <TextEditor setDescription={setDescription} description={description} />
+      <div className="mt-6">
+        {isLoading ? (
+          <Button type="submit">
+            <Loading />
+          </Button>
+        ) : (
+          <Button type="submit">Add product</Button>
+        )}
+      </div>
     </form>
   );
 };
