@@ -49,3 +49,6 @@
 .dashboard-grid {
   grid-template-columns: 20% 1fr;
 }
+.product-grid {
+  grid-template-columns: 28% 1fr;
+}

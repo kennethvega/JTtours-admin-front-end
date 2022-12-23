@@ -12,13 +12,11 @@ export type ProductType = {
 };
 
 export type ImageType = {
-  image: {
-    public_id: string;
-    fileName: string;
-    imageURL: string;
-    fileType: string;
-    fileSize: string;
-  };
+  public_id: string;
+  fileName: string;
+  imageURL: string;
+  fileType: string;
+  fileSize: string;
 };
 
 export type Product = {

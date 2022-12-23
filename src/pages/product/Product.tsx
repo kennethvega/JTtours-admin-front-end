@@ -2,12 +2,13 @@ import Layout from '../../components/utility/Layout';
 import { VscDiffAdded } from 'react-icons/vsc';
 import usePageRedirect from '../../hooks/usePageRedirect';
 import { Link } from 'react-router-dom';
+import ProductList from '../../components/products/ProductList';
 const Product = () => {
   usePageRedirect('/login');
 
   return (
     <Layout>
-      <div className="min-h-[50rem]">
+      <div className="min-h-screen">
         <div className="flex">
           <Link to="/add-product">
             <p className="flex items-center gap-2 hover:text-blue-500 cursor-pointer mb-2 bg-gray-200 px-3 py-2 rounded-md">
@@ -17,6 +18,7 @@ const Product = () => {
           </Link>
         </div>
         <hr />
+        <ProductList />
       </div>
     </Layout>
   );

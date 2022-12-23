@@ -7,7 +7,7 @@ import { RootState } from '../../store';
 
 type State = {
   product: Product | null;
-  products: Product[];
+  products: ProductType[];
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
@@ -63,7 +63,6 @@ const productSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        console.log(action.payload);
         state.products.push(action.payload);
         toast.success('Product added successfully');
       })
@@ -91,7 +90,7 @@ const productSlice = createSlice({
       });
   },
 });
-// ACTIONS
+// ACTIONS-
 export const { SET_PRODUCTS } = productSlice.actions;
 //STATE
 export const selectIsLoading = (state: RootState) => state.product.isLoading;

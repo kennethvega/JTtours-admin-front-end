@@ -1,4 +1,4 @@
-import React, {  SetStateAction, FormEvent, useRef } from 'react';
+import React, { SetStateAction, FormEvent, useRef } from 'react';
 import upload from '../../assets/upload.jpg';
 import Button from '../utility/Button';
 import { useAppSelector } from '../../redux/hooks';
@@ -42,16 +42,16 @@ const ProductForm = ({ product, productImage, imagePreview, description, setDesc
             fileInputRef.current?.click();
           }}
         />
-        <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImageChange} disabled={isLoading ? true : false} />
+        <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImageChange} disabled={isLoading ? true : false} required />
       </div>
       <label>Country:</label>
-      <input name="country" value={product?.country} onChange={handleInputChange} type="text" placeholder="Country" />
+      <input name="country" value={product?.country} onChange={handleInputChange} type="text" placeholder="Country" required />
       <label>City:</label>
-      <input name="city" value={product?.city} onChange={handleInputChange} type="text" placeholder="City" />
+      <input name="city" value={product?.city} onChange={handleInputChange} type="text" placeholder="City" required />
       <label>Price:</label>
-      <input name="price" value={product?.price} onChange={handleInputChange} type="text" placeholder="Price" />
+      <input name="price" value={product?.price} onChange={handleInputChange} type="text" placeholder="Price" required />
       <label>Date:</label>
-      <input name="date" value={product?.date} onChange={handleInputChange} type="text" placeholder="Date" />
+      <input name="date" value={product?.date} onChange={handleInputChange} type="text" placeholder="Date" required />
       <label>Description:</label>
       <textarea
         id="description"
@@ -61,6 +61,7 @@ const ProductForm = ({ product, productImage, imagePreview, description, setDesc
         }}
         placeholder="Description"
         className="mb-4"
+        required
       />
       {isLoading ? (
         <Button type="submit">

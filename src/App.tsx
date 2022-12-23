@@ -13,12 +13,15 @@ import { useAppSelector, useAppDispatch } from './redux/hooks';
 import { SET_LOGIN, SET_NAME, SET_USER } from './redux/features/auth/authSlice';
 import { getLoginStatus } from './redux/features/auth/authService';
 import AddProduct from './pages/product/AddProduct';
+import { getAllProducts } from './redux/features/products/productSlice';
 axios.defaults.withCredentials = true; // axios default setting
 function App() {
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const auth = useAppSelector(selectAuth);
-  // Get login status
+
+  // This is in the app component
+  // Fetch necessary data
   useEffect(() => {
     async function loginStatus() {
       const status = await getLoginStatus();
@@ -27,6 +30,7 @@ function App() {
     }
     loginStatus();
   }, [dispatch]);
+
   return (
     <>
       {auth && (
