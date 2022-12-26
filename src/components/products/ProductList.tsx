@@ -14,6 +14,7 @@ const ProductList = () => {
   const { products, isLoading, isError, message } = useAppSelector((state) => state.product);
   const filteredProducts = useAppSelector(selectFilteredProducts);
   const [search, setSearch] = useState('');
+
   useEffect(() => {
     // get all products
     if (isLoggedIn && products.length === 0) {
@@ -30,6 +31,8 @@ const ProductList = () => {
       <div className="flex justify-between">
         <h3 className="font-semibold text-xl">Products</h3> <Search value={search} onChange={(e: any) => setSearch(e.target.value)} />
       </div>
+   
+
       {!isLoading ? (
         <div className="block gap-3 mt-3">
           {filteredProducts.map((product: ProductType) => (
