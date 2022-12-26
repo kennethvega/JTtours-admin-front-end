@@ -21,6 +21,7 @@ const initialState: State = {
   isSuccess: false,
   message: '',
 };
+
 // CREATE NEW PRODUCT
 export const createProduct = createAsyncThunk('products/create', async (formData: Product, thunkAPI) => {
   try {
@@ -44,12 +45,39 @@ export const getAllProducts = createAsyncThunk('products/getAllProducts', async 
     return thunkAPI.rejectWithValue(message);
   }
 });
+
 // DELETE A PRODUCT
 export const deleteProduct = createAsyncThunk('products/delete', async (id: string, thunkAPI) => {
   try {
     return await productService.deleteProduct(id);
   } catch (error: any) {
     // error message format
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+    console.log(message);
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+// GET A SINGLE PRODUCT
+export const getProduct = createAsyncThunk('products/getProduct', async (id: string | undefined, thunkAPI) => {
+  try {
+    return await productService.getProduct(id);
+  } catch (error: any) {
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+    console.log(message);
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+type UpdateProps = {
+  id: string | undefined;
+  formData: Product;
+};
+// UPDATE PRODUCT
+export const updateProduct = createAsyncThunk('products/updateProduct', async ({ id, formData }: UpdateProps, thunkAPI) => {
+  try {
+    return await productService.updateProduct(id, formData);
+  } catch (error: any) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
     console.log(message);
     return thunkAPI.rejectWithValue(message);
@@ -114,6 +142,36 @@ const productSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         toast.error(action.payload as string);
+      }) //GET A SINGLE PRODUCT
+      .addCase(getProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.product = action.payload;
+      })
+      .addCase(getProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload as string);
+      }) //UPDATE PRODUCT
+      .addCase(updateProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        toast.success('Product updated successfully');
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload as string);
       });
   },
 });
@@ -121,4 +179,5 @@ const productSlice = createSlice({
 export const { SET_PRODUCTS } = productSlice.actions;
 //STATE
 export const selectIsLoading = (state: RootState) => state.product.isLoading;
+export const selectProduct = (state: RootState) => state.product.product;
 export default productSlice.reducer;

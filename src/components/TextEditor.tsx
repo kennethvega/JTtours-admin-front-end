@@ -63,16 +63,14 @@ type TextEditorProps = {
 const TextEditor = ({ setDescription, description }: TextEditorProps) => {
   const editor = useEditor({
     extensions: [StarterKit, Underline],
-
-    content: `${description ? `${description}` : ''}
-    
-    `,
+    content: description ? description : '',
     editable: true,
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
       setDescription(html);
     },
   });
+  console.log(description);
 
   return (
     <div className="text-editor">

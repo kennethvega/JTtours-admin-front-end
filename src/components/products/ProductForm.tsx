@@ -12,7 +12,7 @@ type Product = {
   date: string;
 };
 type ProductFormProps = {
-  product: Product;
+  product: Product | null | undefined;
   productImage: SetStateAction<string> | File;
   imagePreview: string | null;
   description: string;
@@ -24,6 +24,7 @@ type ProductFormProps = {
 const ProductForm = ({ product, productImage, imagePreview, description, setDescription, handleInputChange, handleImageChange, saveProduct }: ProductFormProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const isLoading = useAppSelector(selectIsLoading);
+  console.log(description);
   return (
     <form onSubmit={saveProduct} className="py-2">
       <div className="flex flex-col mb-5">
@@ -54,7 +55,7 @@ const ProductForm = ({ product, productImage, imagePreview, description, setDesc
       <label>Date:</label>
       <input name="date" value={product?.date} onChange={handleInputChange} type="text" placeholder="Date" required />
       <label>Description:</label>
-      <TextEditor setDescription={setDescription} description={description} />
+      <TextEditor description={description} setDescription={setDescription} />
       <div className="mt-6">
         {isLoading ? (
           <Button type="submit">

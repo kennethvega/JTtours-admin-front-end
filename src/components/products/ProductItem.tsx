@@ -8,6 +8,7 @@ import Button from '../utility/Button';
 import { deleteProduct, getAllProducts } from '../../redux/features/products/productSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Loading from '../utility/Loading';
+import { Link } from 'react-router-dom';
 type ProductItemProps = {
   product: ProductType;
 };
@@ -33,7 +34,10 @@ const ProductItem = ({ product }: ProductItemProps) => {
               <span className="font-bold">Package:</span> {product?.country} | {product?.city} | {product?.price}
             </h3>
             <div className="flex gap-3 text-2xl">
-              <TbEdit className="text-green-700 cursor-pointer" title="edit" />
+              <Link to={`/edit-product/${product._id}`}>
+                <TbEdit className="text-green-700 cursor-pointer" title="edit" />
+              </Link>
+
               <div onClick={() => setOpenModal(true)}>
                 <MdDeleteForever className="text-red-700 cursor-pointer" title="delete" />
               </div>
