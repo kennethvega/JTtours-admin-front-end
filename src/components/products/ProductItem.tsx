@@ -5,12 +5,24 @@ import { ProductType } from '../../ts/productTypes';
 import DOMPurify from 'dompurify';
 import Modal from '../utility/Modal';
 import Button from '../utility/Button';
+import { deleteProduct, getAllProducts } from '../../redux/features/products/productSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import Loading from '../utility/Loading';
 type ProductItemProps = {
   product: ProductType;
 };
 
 const ProductItem = ({ product }: ProductItemProps) => {
   const [openModal, setOpenModal] = useState(false);
+  const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state) => state.product);
+
+  const handleDelete = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    await dispatch(deleteProduct(product._id));
+    await dispatch(getAllProducts());
+  };
+
   return (
     <div className="mt-6 bg-gray-200 p-2 border rounded-md">
       <div className="grid product-grid">
@@ -50,7 +62,13 @@ const ProductItem = ({ product }: ProductItemProps) => {
             <p className="text-xl font-semibold">
               {product?.country} | {product?.city} | {product?.price}{' '}
             </p>
-            <Button>Delete</Button>
+            {isLoading ? (
+              <Button>
+                <Loading />
+              </Button>
+            ) : (
+              <Button onClick={handleDelete}>Delete</Button>
+            )}
           </div>
         </Modal>
       )}
