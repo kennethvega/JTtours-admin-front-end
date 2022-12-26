@@ -89,8 +89,11 @@ const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    SET_PRODUCTS(state, action) {
-      console.log('products');
+    SET_LOADING(state, action) {
+      state.isLoading === action.payload;
+    },
+    SET_PRODUCT(state, action) {
+      state.product === action.payload;
     },
   },
   // loading,success,error state asyncThunk
@@ -103,7 +106,7 @@ const productSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.products.unshift(action.payload);
+        state.products.push(action.payload);
         toast.success('Product added successfully');
       })
       .addCase(createProduct.rejected, (state, action) => {
@@ -151,6 +154,7 @@ const productSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.product = action.payload;
+        console.log(action.payload);
       })
       .addCase(getProduct.rejected, (state, action) => {
         state.isLoading = false;
@@ -176,7 +180,7 @@ const productSlice = createSlice({
   },
 });
 // ACTIONS-
-export const { SET_PRODUCTS } = productSlice.actions;
+export const { SET_LOADING, SET_PRODUCT } = productSlice.actions;
 //STATE
 export const selectIsLoading = (state: RootState) => state.product.isLoading;
 export const selectProduct = (state: RootState) => state.product.product;
