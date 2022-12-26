@@ -37,8 +37,8 @@ const productService = {
   createProduct,
   getAllProducts,
   deleteProduct,
-  updateProduct,
   getProduct,
+  updateProduct,
 };
 
 export default productService;

@@ -63,8 +63,11 @@ const EditProduct = () => {
     formData.append('price', product?.price);
     formData.append('date', product?.date);
     formData.append('description', description);
-    formData.append('image', productImage);
-    await dispatch(updateProduct(formData));
+    if (productImage) {
+      formData.append('image', productImage);
+    }
+    await dispatch(updateProduct({ id, formData }));
+    await dispatch(getProduct());
     navigate('/'); //navigate to products dashboard
   };
 
