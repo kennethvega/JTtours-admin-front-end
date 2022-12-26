@@ -3,9 +3,25 @@ import { VscDiffAdded } from 'react-icons/vsc';
 import usePageRedirect from '../../hooks/usePageRedirect';
 import { Link } from 'react-router-dom';
 import ProductList from '../../components/products/ProductList';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { getAllProducts, selectIsLoading, SET_PRODUCT } from '../../redux/features/products/productSlice';
+import { selectIsLoggedIn } from '../../redux/features/auth/authSlice';
 const Product = () => {
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const dispatch = useAppDispatch();
   usePageRedirect('/login');
+  const { products, isLoading, isError, message } = useAppSelector((state) => state.product);
+  useEffect(() => {
+    if (isLoggedIn === true) {
+      dispatch(getAllProducts());
 
+    }
+
+    if (isError) {
+      console.log(message);
+    }
+  }, [isLoggedIn, isError, message, dispatch]);
   return (
     <Layout>
       <div className="min-h-screen">

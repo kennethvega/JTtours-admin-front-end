@@ -5,9 +5,10 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import usePageRedirect from '../../hooks/usePageRedirect';
 import { toast } from 'react-hot-toast';
 import ProductForm from '../../components/products/ProductForm';
-import { getProduct, selectIsLoading, selectProduct, updateProduct } from '../../redux/features/products/productSlice';
+import { getProduct, selectIsLoading, selectProduct, SET_LOADING, updateProduct } from '../../redux/features/products/productSlice';
 import { Product } from '../../ts/productTypes';
 import Loading from '../../components/utility/Loading';
+import TextEditor from '../../components/TextEditor';
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -15,27 +16,32 @@ const EditProduct = () => {
   const dispatch = useAppDispatch();
   const productEdit = useAppSelector(selectProduct);
   const isLoading = useAppSelector(selectIsLoading);
+
   // local state
-  const [product, setProduct] = useState<Product | null | undefined>();
+  const [product, setProduct] = useState<Product | null | undefined>(productEdit);
   const [productImage, setProductImage] = useState<File | string>('');
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [description, setDescription] = useState<string>('');
+  const [description, setDescription] = useState(productEdit?.description);
   usePageRedirect('/login');
   const navigate = useNavigate();
 
   useEffect(() => {
     const getDetails = async () => {
+      dispatch(SET_LOADING(true));
       await dispatch(getProduct(id));
     };
     getDetails();
-  }, [dispatch, id]);
+  }, []);
 
   useEffect(() => {
-    if (productEdit) {
+    const setDetails = async () => {
+      dispatch(SET_LOADING(true));
+      setDescription(productEdit && productEdit.description ? productEdit.description : '');
       setProduct(productEdit as Product);
       setImagePreview(productEdit && productEdit.image ? `${productEdit.image.imageURL}` : null);
-      setDescription(productEdit && productEdit.description ? productEdit.description : '');
-    }
+      dispatch(SET_LOADING(false));
+    };
+    setDetails();
   }, [productEdit, id, description]);
 
   // Handling input changes on product
@@ -81,7 +87,7 @@ const EditProduct = () => {
         </div>
         <h3 className="text-xl font-medium">Add New Product</h3>
         <hr />
-        {isLoading || !productEdit ? (
+        {isLoading ? (
           <div className="flex justify-center item-center">
             <Loading />
           </div>
@@ -90,7 +96,7 @@ const EditProduct = () => {
             product={product}
             productImage={productImage}
             imagePreview={imagePreview}
-            description={description}
+            description={description as string}
             setDescription={setDescription}
             handleInputChange={handleInputChange}
             handleImageChange={handleImageChange}
