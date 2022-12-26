@@ -43,7 +43,7 @@ const ProductForm = ({ product, productImage, imagePreview, description, setDesc
             fileInputRef.current?.click();
           }}
         />
-        <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImageChange} disabled={isLoading ? true : false} required />
+        <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImageChange} disabled={isLoading ? true : false} />
       </div>
       <label>Country:</label>
       <input name="country" value={product?.country} onChange={handleInputChange} type="text" placeholder="Country" required />

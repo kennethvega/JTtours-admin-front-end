@@ -5,6 +5,7 @@ import { useState, FormEvent, SetStateAction } from 'react';
 import { createProduct } from '../../redux/features/products/productSlice';
 import { useAppDispatch } from '../../redux/hooks';
 import ProductForm from '../../components/products/ProductForm';
+import { toast } from 'react-hot-toast';
 
 type InitialState = {
   country: string;
@@ -46,6 +47,12 @@ const AddProduct = () => {
   // Handle Submit product
   const saveProduct = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (productImage.length === 0) {
+      return toast.error('please add an image');
+    }
+    if (!description || description.length < 40) {
+      return toast.error('please add a description greater than 30 characters');
+    }
     const formData = new FormData() as FormData | any; //use this for the image
     formData.append('country', country);
     formData.append('city', city);
