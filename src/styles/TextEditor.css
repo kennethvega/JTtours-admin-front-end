@@ -63,6 +63,15 @@ button svg {
 .ProseMirror h6 {
   line-height: 1.1;
 }
+.ProseMirror h1 {
+  font-size: 2rem;
+}
+.ProseMirror h2 {
+  font-size: 1.7rem;
+}
+.ProseMirror h3 {
+  font-size: 1.5rem;
+}
 .ProseMirror pre {
   font-size: 18px;
   background: rgb(243 244 246);

@@ -1,9 +1,14 @@
-import React from 'react'
+type SearchProps = {
+  value: string | undefined;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
-const Search = () => {
+const Search = ({ value, onChange }: SearchProps) => {
   return (
-    <div>Search</div>
-  )
-}
+    <div className="w-72 rounded-md">
+      <input type="text" placeholder="Search a product" value={value} onChange={onChange} />
+    </div>
+  );
+};
 
-export default Search
+export default Search;

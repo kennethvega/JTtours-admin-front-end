@@ -21,15 +21,17 @@ const ProductItem = ({ product }: ProductItemProps) => {
               <MdDeleteForever className="text-red-700 cursor-pointer" title="delete" />
             </div>
           </div>
+
           <p>
+            <span className="font-bold">Description:</span>
             <div
               className="scrollbar"
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(product?.description.substring(0, 200)),
               }}
             ></div>
-            ...
           </p>
+
           <p>
             <span className="font-bold">Tour Date:</span> {product?.date}
           </p>
