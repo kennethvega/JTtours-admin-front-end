@@ -85,7 +85,7 @@ const EditProduct = () => {
             <p className="flex items-center gap-2 hover:text-blue-500 cursor-pointer mb-2 bg-gray-200 px-3 rounded-md py-2">&larr; Back to products list</p>
           </Link>
         </div>
-        <h3 className="text-xl font-medium">Add New Product</h3>
+        <h3 className="text-xl font-medium">Edit this product</h3>
         <hr />
         {isLoading ? (
           <div className="flex justify-center item-center">

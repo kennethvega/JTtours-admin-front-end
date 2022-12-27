@@ -14,7 +14,7 @@ const ProductList = () => {
   const { products, isLoading, isError, message } = useAppSelector((state) => state.product);
   const filteredProducts = useAppSelector(selectFilteredProducts);
   const [search, setSearch] = useState('');
-  console.log(filteredProducts);
+
   useEffect(() => {
     // get all products
     if (isLoggedIn && products.length === 0) {
@@ -25,7 +25,7 @@ const ProductList = () => {
   useEffect(() => {
     dispatch(FILTER_PRODUCTS({ products, search }));
   }, [products, search, dispatch]);
-  console.log(search);
+
   return (
     <>
       <div className="flex justify-between">

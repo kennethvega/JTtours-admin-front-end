@@ -15,6 +15,7 @@ import { getLoginStatus } from './redux/features/auth/authService';
 import AddProduct from './pages/product/AddProduct';
 import { getAllProducts } from './redux/features/products/productSlice';
 import EditProduct from './pages/product/EditProduct';
+import Bookings from './pages/bookings/Bookings';
 axios.defaults.withCredentials = true; // axios default setting
 function App() {
   const dispatch = useAppDispatch();
@@ -43,6 +44,7 @@ function App() {
             <Route path="/" element={<Product />} />
             <Route path="/add-product" element={<AddProduct />} />
             <Route path="/edit-product/:id" element={<EditProduct />} />
+            <Route path="/bookings" element={<Bookings />} />
           </Routes>
         </BrowserRouter>
       )}

@@ -32,7 +32,7 @@ const Product = () => {
             </p>
           </Link>
         </div>
-        <hr />
+        <hr className="mb-6" />
         <ProductList />
       </div>
     </Layout>
