@@ -1,17 +1,18 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState } from 'react';
 import { BookingsType } from '../../ts/bookingTypes';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import { MdDeleteForever } from 'react-icons/md';
-import Loading from '../utility/Loading';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { selectIsLoggedIn } from '../../redux/features/auth/authSlice';
-import { getAllBookings, getBooking, updateStatus } from '../../redux/features/bookings/bookingSlice';
+import { useAppDispatch } from '../../redux/hooks';
+import { deleteBooking, getAllBookings, updateStatus } from '../../redux/features/bookings/bookingSlice';
+import Modal from '../utility/Modal';
+import Button from '../utility/Button';
 
 type BookingItemProps = {
   booking: BookingsType;
 };
 const BookingItem = ({ booking }: BookingItemProps) => {
+  const [openModal, setOpenModal] = useState(false);
   const dispatch = useAppDispatch();
   const date = new Date(booking?.createdAt);
   const id = booking._id;
@@ -25,19 +26,19 @@ const BookingItem = ({ booking }: BookingItemProps) => {
 
   const handleDelete = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    // await dispatch(updateStatus({ id, status }));
-    // await dispatch(getAllBookings());
+    await dispatch(deleteBooking(id));
+    await dispatch(getAllBookings());
   };
   return (
     <div>
-      <div className={`${booking?.status === true ? 'bg-green-500' : 'bg-gray-200'}  mt-4 p-4 rounded-md`}>
+      <div className={`${booking?.status === true ? 'bg-green-400' : 'bg-gray-200'}  mt-4 p-4 rounded-md`}>
         <div className="flex justify-between">
           <p>
             <span className="font-semibold">Status: </span> <span className={`${booking.status === true ? 'bg-green-900' : 'bg-orange-500'} text-white p-1 px-2 rounded-xl`}> {booking?.status === true ? 'Completed' : 'Pending'} </span>{' '}
           </p>
           <div className="flex gap-3 text-xl items-center">
             <BsFillCheckCircleFill onClick={handleStatus} className="cursor-pointer" />
-            <MdDeleteForever onClick={handleDelete} className="text-2xl cursor-pointer text-red-700" />
+            <MdDeleteForever onClick={() => setOpenModal(true)} className="text-2xl cursor-pointer text-red-700" />
           </div>
         </div>
 
@@ -74,6 +75,14 @@ const BookingItem = ({ booking }: BookingItemProps) => {
           <span className="font-semibold">Note/Message:</span> {booking?.note}
         </p>
       </div>
+      {openModal && (
+        <Modal openModal={openModal} onClose={() => setOpenModal(false)}>
+          <div className="flex flex-col gap-10">
+            <h2 className="text-2xl font-semibold text-red-600">{`Are you sure you want to delete this item?`}</h2>
+            <Button onClick={handleDelete}>Delete</Button>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };

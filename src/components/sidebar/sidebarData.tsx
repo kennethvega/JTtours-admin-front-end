@@ -14,11 +14,6 @@ export const menu = [
     path: '/bookings',
   },
   {
-    title: 'Customer emails',
-    icon: <AiOutlineMail />,
-    path: '/customer-emails',
-  },
-  {
     title: 'Customer review',
     icon: <RiDoubleQuotesL />,
     path: '/customer-review',
