@@ -20,7 +20,7 @@ const BookingList = () => {
       console.log(message);
     }
   }, [isLoggedIn, isError, message, dispatch]);
-  console.log(bookings);
+
   return (
     <div>
       {!isLoading ? (
