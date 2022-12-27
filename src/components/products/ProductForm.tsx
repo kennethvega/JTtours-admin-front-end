@@ -4,6 +4,7 @@ import Button from '../utility/Button';
 import { useAppSelector } from '../../redux/hooks';
 import { selectIsLoading } from '../../redux/features/products/productSlice';
 import Loading from '../utility/Loading';
+import ReactQuill from 'react-quill';
 
 type Product = {
   country: string;
@@ -24,7 +25,7 @@ type ProductFormProps = {
 const ProductForm = ({ product, productImage, imagePreview, description, setDescription, handleInputChange, handleImageChange, saveProduct }: ProductFormProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const isLoading = useAppSelector(selectIsLoading);
-  console.log(description);
+
   return (
     <form onSubmit={saveProduct} className="py-2">
       <div className="flex flex-col mb-5">
@@ -47,16 +48,16 @@ const ProductForm = ({ product, productImage, imagePreview, description, setDesc
         <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImageChange} disabled={isLoading ? true : false} />
       </div>
       <label>Country:</label>
-      <input name="country" value={product?.country} onChange={handleInputChange} type="text" placeholder="Country" required />
+      <input name="country" value={product?.country || ''} onChange={handleInputChange} type="text" placeholder="Country" required />
       <label>City:</label>
-      <input name="city" value={product?.city} onChange={handleInputChange} type="text" placeholder="City" required />
+      <input name="city" value={product?.city || ''} onChange={handleInputChange} type="text" placeholder="City" required />
       <label>Price:</label>
-      <input name="price" value={product?.price} onChange={handleInputChange} type="text" placeholder="Price" required />
+      <input name="price" value={product?.price || ''} onChange={handleInputChange} type="text" placeholder="Price" required />
       <label>Date:</label>
-      <input name="date" value={product?.date} onChange={handleInputChange} type="text" placeholder="Date" required />
+      <input name="date" value={product?.date || ''} onChange={handleInputChange} type="text" placeholder="Date" required />
       <label>Description:</label>
-
-      {/* <textarea value={description} onChange={setDescription} /> */}
+      <ReactQuill theme="snow" value={description || ' '} onChange={setDescription} modules={ProductForm.modules} formats={ProductForm.formats} />
+      {/* <input type="text" name="description" value={description || ' '} onChange={(e) => setDescription(e.target.value)} /> */}
       <div className="mt-6">
         {isLoading ? (
           <Button type="submit">
@@ -69,5 +70,18 @@ const ProductForm = ({ product, productImage, imagePreview, description, setDesc
     </form>
   );
 };
+
+ProductForm.modules = {
+  toolbar: [
+    [{ header: '1' }, { header: '2' }, { font: [] }],
+    [{ size: [] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ align: [] }],
+    [{ color: [] }, { background: [] }],
+    [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+    ['clean'],
+  ],
+};
+ProductForm.formats = ['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'color', 'background', 'list', 'bullet', 'indent', 'link', 'video', 'image', 'code-block', 'align'];
 
 export default ProductForm;

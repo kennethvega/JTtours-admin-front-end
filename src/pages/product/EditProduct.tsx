@@ -8,7 +8,6 @@ import ProductForm from '../../components/products/ProductForm';
 import { getProduct, selectIsLoading, selectProduct, SET_LOADING, updateProduct } from '../../redux/features/products/productSlice';
 import { Product } from '../../ts/productTypes';
 import Loading from '../../components/utility/Loading';
-import TextEditor from '../../components/TextEditor';
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -20,8 +19,8 @@ const EditProduct = () => {
   // local state
   const [product, setProduct] = useState<Product | null | undefined>(productEdit);
   const [productImage, setProductImage] = useState<File | string>('');
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [description, setDescription] = useState(productEdit?.description);
+  const [imagePreview, setImagePreview] = useState<string | null>('');
+  const [description, setDescription] = useState('');
   usePageRedirect('/login');
   const navigate = useNavigate();
 
@@ -36,13 +35,13 @@ const EditProduct = () => {
   useEffect(() => {
     const setDetails = async () => {
       dispatch(SET_LOADING(true));
-      setDescription(productEdit && productEdit.description ? productEdit.description : '');
+      setDescription(productEdit && productEdit.description ? productEdit.description : ' ');
       setProduct(productEdit as Product);
       setImagePreview(productEdit && productEdit.image ? `${productEdit.image.imageURL}` : null);
       dispatch(SET_LOADING(false));
     };
     setDetails();
-  }, [productEdit, id, description]);
+  }, [productEdit, id]);
 
   // Handling input changes on product
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -57,6 +56,7 @@ const EditProduct = () => {
       setImagePreview(URL.createObjectURL(e.target.files[0]));
     }
   };
+
   // Handle Submit product
   const saveProduct = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -69,13 +69,13 @@ const EditProduct = () => {
     formData.append('price', product?.price);
     formData.append('date', product?.date);
     formData.append('description', description);
-    if (productImage) {
+    if (productImage !== undefined || productImage !== null || productImage !== '') {
       formData.append('image', productImage);
     }
     await dispatch(updateProduct({ id, formData }));
-    await dispatch(getProduct());
     navigate('/'); //navigate to products dashboard
   };
+  console.log(productImage);
 
   return (
     <Layout>
@@ -96,7 +96,7 @@ const EditProduct = () => {
             product={product}
             productImage={productImage}
             imagePreview={imagePreview}
-            description={description as string}
+            description={description}
             setDescription={setDescription}
             handleInputChange={handleInputChange}
             handleImageChange={handleImageChange}

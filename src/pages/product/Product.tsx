@@ -15,7 +15,6 @@ const Product = () => {
   useEffect(() => {
     if (isLoggedIn === true) {
       dispatch(getAllProducts());
-
     }
 
     if (isError) {
