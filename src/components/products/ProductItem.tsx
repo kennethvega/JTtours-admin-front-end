@@ -25,7 +25,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
   };
 
   return (
-    <div className="mt-6 bg-gray-200 p-2 border rounded-md">
+    <div className="mt-6 bg-gray-200 p-2 border rounded-md overflow-hidden word-break">
       <div className="grid product-grid">
         <img className="w-[250px] rounded-md" src={product?.image?.imageURL} />
         <div className="flex flex-col justify-between">

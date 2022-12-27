@@ -52,3 +52,6 @@
 .product-grid {
   grid-template-columns: 28% 1fr;
 }
+.word-break {
+  word-break: break-word;
+}
