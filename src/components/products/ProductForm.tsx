@@ -57,7 +57,6 @@ const ProductForm = ({ product, productImage, imagePreview, description, setDesc
       <input name="date" value={product?.date || ''} onChange={handleInputChange} type="text" placeholder="Date" required />
       <label>Description:</label>
       <ReactQuill theme="snow" value={description || ' '} onChange={setDescription} modules={ProductForm.modules} formats={ProductForm.formats} />
-      {/* <input type="text" name="description" value={description || ' '} onChange={(e) => setDescription(e.target.value)} /> */}
       <div className="mt-6">
         {isLoading ? (
           <Button type="submit">

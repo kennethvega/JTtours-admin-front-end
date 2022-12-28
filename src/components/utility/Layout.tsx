@@ -8,14 +8,14 @@ import Sidebar from '../sidebar/Sidebar';
 import Button from './Button';
 import Card from './Card';
 import Container from './Container';
-
+import useRedirectLoggedOutUser from '../../hooks/usePageRedirect';
 type LayoutProps = {
   children: React.ReactNode;
 };
 const Layout = ({ children }: LayoutProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  useRedirectLoggedOutUser('/login'); // redirect to login if user is not logged in
   const logout = async () => {
     await logoutUser();
     await dispatch(SET_LOGIN(false));

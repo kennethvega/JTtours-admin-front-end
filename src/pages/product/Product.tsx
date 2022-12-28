@@ -10,13 +10,12 @@ import { selectIsLoggedIn } from '../../redux/features/auth/authSlice';
 const Product = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const dispatch = useAppDispatch();
-  usePageRedirect('/login');
+
   const { products, isLoading, isError, message } = useAppSelector((state) => state.product);
   useEffect(() => {
     if (isLoggedIn === true) {
       dispatch(getAllProducts());
     }
-
     if (isError) {
       console.log(message);
     }
