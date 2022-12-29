@@ -89,9 +89,6 @@ const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    SET_LOADING(state, action) {
-      state.isLoading === action.payload;
-    },
     SET_PRODUCT(state, action) {
       state.product === action.payload;
     },
@@ -106,7 +103,7 @@ const productSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.products.push(action.payload);
+        state.products.unshift(action.payload);
         toast.success('Product added successfully');
       })
       .addCase(createProduct.rejected, (state, action) => {
@@ -179,7 +176,7 @@ const productSlice = createSlice({
   },
 });
 // ACTIONS-
-export const { SET_LOADING, SET_PRODUCT } = productSlice.actions;
+export const { SET_PRODUCT } = productSlice.actions;
 //STATE
 export const selectIsLoading = (state: RootState) => state.product.isLoading;
 export const selectProduct = (state: RootState) => state.product.product;

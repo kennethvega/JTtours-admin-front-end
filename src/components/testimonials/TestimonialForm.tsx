@@ -9,7 +9,7 @@ type Customer = {
   message: string;
 };
 type TestimonialFormProps = {
-  customer: Customer;
+  customer: Customer | null;
   customerImage: SetStateAction<string> | File;
   imagePreview: string | null;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -43,15 +43,15 @@ const TestimonialForm = ({ customer, customerImage, imagePreview, handleInputCha
         <label>Name:</label>
         <input name="name" value={customer?.name || ''} onChange={handleInputChange} type="text" placeholder="Customer name" required />
         <label>Message:</label>
-        <input name="message" value={customer?.message || ''} onChange={handleInputChange} type="text" placeholder="Customer message" required />
+        <input name="message" value={customer?.message || ''} onChange={handleInputChange} type="text" placeholder="Customer message" maxLength={100} required />
       </div>
       <div className="mt-6">
         {isLoading ? (
-          <Button type="submit">
+          <Button>
             <Loading />
           </Button>
         ) : (
-          <Button type="submit">Add product</Button>
+          <Button type="submit">Add customer review</Button>
         )}
       </div>
     </form>

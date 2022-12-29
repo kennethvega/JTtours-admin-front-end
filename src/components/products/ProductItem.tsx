@@ -29,11 +29,11 @@ const ProductItem = ({ product }: ProductItemProps) => {
       <div className="grid product-grid">
         <img className="w-[250px] rounded-md" src={product?.image?.imageURL} />
         <div className="flex flex-col justify-between">
-          <div className="flex justify-between">
+          <div className="relative">
             <h3>
               <span className="font-bold">Package:</span> {product?.country} | {product?.city} | {product?.price}
             </h3>
-            <div className="flex gap-3 text-2xl">
+            <div className="flex gap-3 text-2xl absolute -top-0 right-0">
               <Link to={`/edit-product/${product._id}`}>
                 <TbEdit className="text-green-700 cursor-pointer" title="edit" />
               </Link>
@@ -44,16 +44,13 @@ const ProductItem = ({ product }: ProductItemProps) => {
             </div>
           </div>
 
-          <p>
-            <span className="font-bold">Description:</span>
-            <div
-              className="scrollbar"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(product?.description.substring(0, 200)),
-              }}
-            ></div>
-          </p>
-
+          <span className="font-bold">Description:</span>
+          <div
+            className="scrollbar"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(product.description.substring(0, 200)),
+            }}
+          ></div>
           <p>
             <span className="font-bold">Tour Date:</span> {product?.date}
           </p>
@@ -62,9 +59,9 @@ const ProductItem = ({ product }: ProductItemProps) => {
       {openModal && (
         <Modal openModal={openModal} onClose={() => setOpenModal(false)}>
           <div className="flex flex-col gap-10">
-            <h2 className="text-2xl font-semibold text-red-600">{`Are you sure you want to delete product this product?`}</h2>
+            <h2 className="text-2xl font-semibold text-red-600">{`Are you sure you want to delete this product?`}</h2>
             <p className="text-xl font-semibold">
-              {product?.country} | {product?.city} | {product?.price}{' '}
+              {product?.country} | {product?.city} | {product?.price}
             </p>
             {isLoading ? (
               <Button>

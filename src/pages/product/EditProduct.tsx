@@ -5,9 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import usePageRedirect from '../../hooks/usePageRedirect';
 import { toast } from 'react-hot-toast';
 import ProductForm from '../../components/products/ProductForm';
-import { getProduct, selectIsLoading, selectProduct, SET_LOADING, updateProduct } from '../../redux/features/products/productSlice';
+import { getAllProducts, getProduct, selectIsLoading, selectProduct, updateProduct } from '../../redux/features/products/productSlice';
 import { Product } from '../../ts/productTypes';
-import Loading from '../../components/utility/Loading';
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -21,12 +20,11 @@ const EditProduct = () => {
   const [productImage, setProductImage] = useState<File | string>('');
   const [imagePreview, setImagePreview] = useState<string | null>('');
   const [description, setDescription] = useState('');
-  usePageRedirect('/login');
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const getDetails = async () => {
-      dispatch(SET_LOADING(true));
       await dispatch(getProduct(id));
     };
     getDetails();
@@ -34,11 +32,9 @@ const EditProduct = () => {
 
   useEffect(() => {
     const setDetails = async () => {
-      dispatch(SET_LOADING(true));
       setDescription(productEdit && productEdit.description ? productEdit.description : ' ');
       setProduct(productEdit as Product);
       setImagePreview(productEdit && productEdit.image ? `${productEdit.image.imageURL}` : null);
-      dispatch(SET_LOADING(false));
     };
     setDetails();
   }, [productEdit, id]);
@@ -73,9 +69,11 @@ const EditProduct = () => {
       formData.append('image', productImage);
     }
     await dispatch(updateProduct({ id, formData }));
-    navigate('/'); //navigate to products dashboard
+    if (!isLoading) {
+      navigate('/'); //navigate to products dashboard
+      await dispatch(getAllProducts());
+    }
   };
-  console.log(productImage);
 
   return (
     <Layout>
@@ -87,22 +85,17 @@ const EditProduct = () => {
         </div>
         <h3 className="text-xl font-medium">Edit this product</h3>
         <hr />
-        {isLoading ? (
-          <div className="flex justify-center item-center">
-            <Loading />
-          </div>
-        ) : (
-          <ProductForm
-            product={product}
-            productImage={productImage}
-            imagePreview={imagePreview}
-            description={description}
-            setDescription={setDescription}
-            handleInputChange={handleInputChange}
-            handleImageChange={handleImageChange}
-            saveProduct={saveProduct}
-          />
-        )}
+
+        <ProductForm
+          product={product}
+          productImage={productImage}
+          imagePreview={imagePreview}
+          description={description}
+          setDescription={setDescription}
+          handleInputChange={handleInputChange}
+          handleImageChange={handleImageChange}
+          saveProduct={saveProduct}
+        />
       </div>
     </Layout>
   );

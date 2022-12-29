@@ -13,7 +13,7 @@ const Product = () => {
 
   const { products, isLoading, isError, message } = useAppSelector((state) => state.product);
   useEffect(() => {
-    if (isLoggedIn === true) {
+    if (isLoggedIn === true && products.length === 0) {
       dispatch(getAllProducts());
     }
     if (isError) {

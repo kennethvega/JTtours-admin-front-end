@@ -18,6 +18,7 @@ import EditProduct from './pages/product/EditProduct';
 import Bookings from './pages/bookings/Bookings';
 import Testimonials from './pages/testimonials/Testimonials';
 import AddTestimonials from './pages/testimonials/AddTestimonials';
+import EditTestimonial from './pages/testimonials/EditTestimonial';
 axios.defaults.withCredentials = true; // axios default setting
 function App() {
   const dispatch = useAppDispatch();
@@ -49,6 +50,7 @@ function App() {
             <Route path="/bookings" element={<Bookings />} />
             <Route path="/customer-review" element={<Testimonials />} />
             <Route path="/add-customer-review" element={<AddTestimonials />} />
+            <Route path="/edit-customer-review/:id" element={<EditTestimonial />} />
           </Routes>
         </BrowserRouter>
       )}

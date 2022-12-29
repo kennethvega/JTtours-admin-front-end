@@ -1,6 +1,6 @@
-
 import { VscDiffAdded } from 'react-icons/vsc';
 import { Link } from 'react-router-dom';
+import TestimonialList from '../../components/testimonials/TestimonialList';
 import Layout from '../../components/utility/Layout';
 
 const Testimonials = () => {
@@ -14,6 +14,7 @@ const Testimonials = () => {
             </p>
           </Link>
         </div>
+        <TestimonialList />
       </div>
     </Layout>
   );
