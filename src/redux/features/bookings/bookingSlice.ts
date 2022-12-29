@@ -33,8 +33,6 @@ export const getAllBookings = createAsyncThunk('booking/getAllBookings', async (
   }
 });
 
-
-
 type UpdateStatusProps = {
   id: string;
   status: boolean;
@@ -74,7 +72,6 @@ const bookingSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        console.log(action.payload);
         state.bookings = action.payload;
       })
       .addCase(getAllBookings.rejected, (state, action) => {

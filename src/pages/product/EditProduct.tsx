@@ -77,7 +77,7 @@ const EditProduct = () => {
 
   return (
     <Layout>
-      <div className="min-h-[50rem]">
+      <div className="min-h-screen">
         <div className="flex mb-6">
           <Link to="/">
             <p className="flex items-center gap-2 hover:text-blue-500 cursor-pointer mb-2 bg-gray-200 px-3 rounded-md py-2">&larr; Back to products list</p>

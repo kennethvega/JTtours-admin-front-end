@@ -43,7 +43,7 @@ const TestimonialForm = ({ customer, customerImage, imagePreview, handleInputCha
         <label>Name:</label>
         <input name="name" value={customer?.name || ''} onChange={handleInputChange} type="text" placeholder="Customer name" required />
         <label>Message:</label>
-        <input name="message" value={customer?.message || ''} onChange={handleInputChange} type="text" placeholder="Customer message" maxLength={100} required />
+        <input name="message" value={customer?.message || ''} onChange={handleInputChange} type="text" placeholder="Customer message" maxLength={200} required />
       </div>
       <div className="mt-6">
         {isLoading ? (

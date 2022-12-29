@@ -1,32 +1,32 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { selectIsLoggedIn } from '../../redux/features/auth/authSlice';
-import { getAllBookings } from '../../redux/features/bookings/bookingSlice';
-
+import { getAllFaqs } from '../../redux/features/faq/faqSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { FaqType } from '../../ts/faqTypes';
 import Loading from '../utility/Loading';
-import BookingItem from './BookingItem';
+import FaqItem from './FaqItem';
 
-const BookingList = () => {
+const FaqList = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const dispatch = useAppDispatch();
 
-  const { bookings, isLoading, isError, message } = useAppSelector((state) => state.booking);
+  const { faqs, isLoading, isError, message } = useAppSelector((state) => state.faq);
   useEffect(() => {
-    if (isLoggedIn === true && bookings.length === 0) {
+    if (isLoggedIn === true && faqs.length === 0) {
       //fetch bookings
-      dispatch(getAllBookings());
+      dispatch(getAllFaqs());
     }
     if (isError) {
       console.log(message);
     }
   }, [isLoggedIn, isError, message, dispatch]);
-
+  console.log(faqs);
   return (
     <div>
       {!isLoading ? (
         <>
-          {bookings.map((booking) => (
-            <BookingItem booking={booking} key={booking._id} />
+          {faqs.map((faq: FaqType) => (
+            <FaqItem faq={faq} key={faq._id} />
           ))}
         </>
       ) : (
@@ -38,4 +38,4 @@ const BookingList = () => {
   );
 };
 
-export default BookingList;
+export default FaqList;

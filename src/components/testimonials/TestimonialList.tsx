@@ -20,7 +20,7 @@ const TestimonialList = () => {
 
   return (
     <>
-      <h3>Customer review</h3>
+      <h3 className="font-semibold text-xl">Customer review</h3>
       <div className="block gap-3 mt-3">
         {isLoading ? (
           <div className="flex justify-center">

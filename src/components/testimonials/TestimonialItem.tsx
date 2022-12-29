@@ -35,7 +35,7 @@ const TestimonialItem = ({ testimonial }: TestimonialItemProps) => {
         </div>
       </div>
       <div className="flex gap-3">
-        <img src={testimonial?.image?.imageURL} className="w-28" />
+        <img src={testimonial?.image?.imageURL} className="w-20 rounded-full h-20" />
         <div>
           <h3>
             <span className="font-semibold">Name: </span> {testimonial?.name}
