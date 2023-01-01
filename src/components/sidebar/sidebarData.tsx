@@ -1,7 +1,7 @@
 import { RiProductHuntLine, RiDoubleQuotesL, RiQuestionnaireLine } from 'react-icons/ri';
-import { AiOutlineMail } from 'react-icons/ai';
+import { IoSettingsOutline } from 'react-icons/io5';
 import { BsCalendarDate } from 'react-icons/bs';
-import { GrUserSettings } from 'react-icons/gr';
+
 export const menu = [
   {
     title: 'Products',
@@ -25,7 +25,7 @@ export const menu = [
   },
   {
     title: 'Settings',
-    icon: <GrUserSettings />,
+    icon: <IoSettingsOutline />,
     path: '/account-settings',
   },
 ];

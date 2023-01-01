@@ -54,3 +54,14 @@ export const getLoginStatus = async () => {
     toast.error(message);
   }
 };
+
+// CHANGE PASSWORD
+export const changePassword = async (formData: any) => {
+  try {
+    const response = await axios.patch(`${BACKEND_URL}/api/users/updatepassword`, formData);
+    return response.data;
+  } catch (error: any) {
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+    toast.error(message);
+  }
+};

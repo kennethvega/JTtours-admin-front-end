@@ -21,6 +21,7 @@ import EditTestimonial from './pages/testimonials/EditTestimonial';
 import Faq from './pages/faq/Faq';
 import AddFaq from './pages/faq/AddFaq';
 import EditFaq from './pages/faq/EditFaq';
+import ChangePassword from './pages/account-settings/ChangePassword';
 axios.defaults.withCredentials = true; // axios default setting
 function App() {
   const dispatch = useAppDispatch();
@@ -55,6 +56,7 @@ function App() {
             <Route path="/faq" element={<Faq />} />
             <Route path="/add-faq" element={<AddFaq />} />
             <Route path="/edit-faq/:id" element={<EditFaq />} />
+            <Route path="/account-settings" element={<ChangePassword />} />
           </Routes>
         </BrowserRouter>
       )}
