@@ -9,17 +9,17 @@ module.exports = {
       xl: { max: "1279px" },
       // => @media (max-width: 1279px) { ... }
 
-      lg: { max: "1137px" },
+      lg: { max: "1013px" },
       // => @media (max-width: 1023px) { ... }
 
-      xmd: { max: "920px" },
+      xmd: { max: "988px" },
 
-      md: { max: "767px" },
+      md: { max: "623px" },
       // => @media (max-width: 767px) { ... }
 
       sm: { max: "639px" },
       // => @media (max-width: 639px) { ... }
-      xsm: { max: "582px" },
+      xsm: { max: "421px" },
       xxsm: { max: "485px" },
     },
     extend: {

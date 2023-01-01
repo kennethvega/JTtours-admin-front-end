@@ -25,15 +25,15 @@ const ProductItem = ({ product }: ProductItemProps) => {
   };
 
   return (
-    <div className="mt-6 bg-gray-200 p-2 border rounded-md overflow-hidden word-break">
+    <div className="mt-6 bg-gray-200 p-2 border rounded-md overflow-hidden word-break relative">
       <div className="grid product-grid">
-        <img className="w-[250px] rounded-md" src={product?.image?.imageURL} />
+        <img className="w-[250px] rounded-md xsm:w-[150px]" src={product?.image?.imageURL} />
         <div className="flex flex-col justify-between">
-          <div className="relative">
+          <div className="">
             <h3>
               <span className="font-bold">Package:</span> {product?.country} | {product?.city} | {product?.price}
             </h3>
-            <div className="flex gap-3 text-2xl absolute -top-0 right-0">
+            <div className="flex gap-3 text-2xl absolute top-2 right-2">
               <Link to={`/edit-product/${product._id}`}>
                 <TbEdit className="text-green-700 cursor-pointer" title="edit" />
               </Link>

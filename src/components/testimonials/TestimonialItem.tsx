@@ -34,7 +34,7 @@ const TestimonialItem = ({ testimonial }: TestimonialItemProps) => {
           <MdDeleteForever className="text-red-700 cursor-pointer" title="delete" />
         </div>
       </div>
-      <div className="flex gap-3">
+      <div className="flex gap-3 xmd:flex-col">
         <img src={testimonial?.image?.imageURL} className="w-20 rounded-full h-20" />
         <div>
           <h3>

@@ -34,10 +34,6 @@
     background-color: #ececec;
   }
 
-  /* a {
-        @apply px-2 py-1 cursor-pointer rounded-md hover:bg-gray-200 transition-all duration-300;
-    } */
-
   input {
     @apply bg-gray-100  h-10 p-2 w-full border rounded mb-6;
   }
@@ -49,9 +45,20 @@
 .dashboard-grid {
   grid-template-columns: 20% 1fr;
 }
+@media only screen and (max-width: 988px) {
+  .dashboard-grid {
+    grid-template-columns: 15% 1fr;
+  }
+}
 .product-grid {
   grid-template-columns: 28% 1fr;
 }
+@media only screen and (max-width: 1013px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .word-break {
   word-break: break-word;
 }

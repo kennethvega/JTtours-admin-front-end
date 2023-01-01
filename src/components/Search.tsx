@@ -5,7 +5,7 @@ type SearchProps = {
 
 const Search = ({ value, onChange }: SearchProps) => {
   return (
-    <div className="w-96 rounded-md">
+    <div className="max-w-96 rounded-md xsm:w-26">
       <input type="text" placeholder="Search a product" value={value} onChange={onChange} />
     </div>
   );

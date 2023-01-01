@@ -29,7 +29,7 @@ const ProductList = () => {
   return (
     <>
       <div className="flex justify-between">
-        <h3 className="font-semibold text-xl">Products</h3>
+        <h3 className="font-semibold text-xl xsm:text-base">Products</h3>
         <Search value={search} onChange={(e: any) => setSearch(e.target.value)} />
       </div>
 
