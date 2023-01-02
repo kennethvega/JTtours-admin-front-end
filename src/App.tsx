@@ -27,7 +27,7 @@ function App() {
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const auth = useAppSelector(selectAuth);
-
+  console.log(isLoggedIn);
   // Fetch necessary data
   useEffect(() => {
     async function loginStatus() {

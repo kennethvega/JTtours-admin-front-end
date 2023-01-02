@@ -35,12 +35,13 @@ const Login = () => {
     setIsLoading(true);
     try {
       const data = await loginUser(userData);
-      console.log(data);
-      await dispatch(SET_LOGIN(true));
-      await dispatch(SET_NAME(data.name));
+      if (data !== undefined) {
+        await dispatch(SET_LOGIN(true));
+        await dispatch(SET_NAME(data.name));
+        toast.success('Successfully logged in');
+        navigate('/');
+      }
       setIsLoading(false);
-      toast.success('Successfully logged in');
-      navigate('/');
     } catch (error: any) {
       toast.error(error.message);
       setIsLoading(false);
