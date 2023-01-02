@@ -55,7 +55,7 @@ const Register = () => {
       await dispatch(SET_LOGIN(true));
       await dispatch(SET_NAME(data.name));
       setIsLoading(false);
-      navigate('/product');
+      navigate('/');
       toast.success('Account created');
     } catch (error: any) {
       toast.error(error.message);
