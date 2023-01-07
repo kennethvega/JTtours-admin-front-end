@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "build:deploy": "env-cmd -f .env npm run build && firebase deploy -P jt-tours-travels-admin"
+    "build:deploy": "env-cmd -f .env npm run build && firebase deploy -P jt-toursandtravels-admin"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",

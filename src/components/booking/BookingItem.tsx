@@ -58,8 +58,12 @@ const BookingItem = ({ booking }: BookingItemProps) => {
           <span className="font-semibold">Contact number: </span> {booking?.contact}
         </p>
         <p>
-          <span className="font-semibold">Customer count: </span>
-          {booking?.customerCount}
+          <span className="font-semibold">Adult count: </span>
+          {booking?.adultCount}
+        </p>
+        <p>
+          <span className="font-semibold">Child count: </span>
+          {booking?.childCount}
         </p>
         <p>
           <span className="font-semibold">Hotel:</span> {booking?.hotel}
