@@ -23,6 +23,7 @@ const BookingList = () => {
 
   return (
     <div>
+      {bookings.length === 0 && <p className="text-center">No bookings yet</p>}
       {!isLoading ? (
         <>
           {bookings.map((booking) => (

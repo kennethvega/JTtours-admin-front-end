@@ -43,14 +43,15 @@ const ProductItem = ({ product }: ProductItemProps) => {
               </div>
             </div>
           </div>
-
-          <span className="font-bold">Description:</span>
-          <div
-            className="scrollbar"
-            dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(product.description.substring(0, 200)),
-            }}
-          ></div>
+          <div>
+            <span className="font-bold">Description:</span>
+            <div
+              className="scrollbar"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(product.description.substring(0, 200)),
+              }}
+            ></div>
+          </div>
           <p>
             <span className="font-bold">Tour Date:</span> {product?.date}
           </p>
